@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <style type = "text/css">
+            .body-canvas {
+                background-color: #4F8FE6;
+                transition: all 1s ease;
+            }
+
+            #container {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            }
+
+            .circle {
+                position: absolute;
+                height: 100px;
+                width: 100px;
+                opacity: 0;
+                border-radius: 100%;
+                background-color: #FA9442;
+                animation: animate 2s alternate infinite ease-out;
+                text-align: center;
+            }
+
+            .circle p {
+                margin-top: 40px;
+                color: #fff;
+                font-size: 10px;
+            }
+
+            @keyframes animate {
+                0%   {
+                    transform: scale(0);
+                }
+
+                50% {
+                    opacity: 0;
+                }
+
+                75% {
+                    opacity: 1;
+                }
+
+                100% {
+                    transform: scale(8);
+                    opacity: 0;
+                }
+            }
+        </style>
+    </head>
+
+    <body class = "body-canvas">
+        <div id = "container">
+            <div class = "circle">
+                <p id = "word"> AWAKE </p>
+            </div>
+        </div>
+        <script type = "text/javascript">
+            const container = document.querySelector("#container");
+            let circle = document.querySelector(".circle");
+            let word = document.getElementById("word");
+            let randomColor, surprisedColor;
+            let body = document.querySelector(".body-canvas");
+
+            const getRandomColor = () => {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+
+                randomColor = color;
+                console.log(randomColor);
+            }
+
+            setInterval(() => {
+                if (word.innerText == "AWAKE") {
+                    circle.style.background = "#4F8FE6";
+                    body.style.backgroundColor = "#A90636";
+                    word.innerText = "SLEEP";
+                }
+            }, 2500);
+
+            setInterval(() => {
+                if (word.innerText == "SLEEP") {
+                    circle.style.background = "#A90636";
+                    body.style.backgroundColor = "#23C17C";
+                    word.innerText = "ANGRY";
+                }
+            }, 5000);
+            
+            setInterval(() => {
+                if (word.innerText == "ANGRY") {
+                    circle.style.background = "#23C17C";
+                    body.style.backgroundColor = "#9FC2B2";
+                    word.innerText = "CALM";
+                }
+            }, 6500);
+
+            setInterval(() => {
+                if (word.innerText == "CALM") {
+                    circle.style.background = "#9FC2B2";
+                    body.style.backgroundColor = "#D998CC";
+                    word.innerText = "SADNESS";
+                }
+            }, 7500);
+
+            setInterval(() => {
+                if (word.innerText == "SADNESS") {
+                    circle.style.background = "#D998CC";
+                    word.innerText = "HAPPINESS";
+                }
+            }, 10500);
+
+            setInterval(() => {
+                if (word.innerText == "HAPPINESS") {
+                    let surprisedColor = setInterval(() => {
+                        getRandomColor()
+                        circle.style.background = randomColor;
+                    }, 100);
+                    body.style.backgroundColor = "#000";
+                    word.innerText = "SURPRISED";
+                }
+            }, 11500);
+        </script>
+    </body>
+</html>
